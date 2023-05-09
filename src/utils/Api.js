@@ -25,3 +25,13 @@ export async function putUserCount(id, newCount) {
     return error.request.statusText;
   }
 }
+
+export async function getUsersSort(user_name) {
+  try {
+    const { data } = await axios(`/users?sortBy=${user_name}`);
+    console.log(data);
+  } catch (error) {
+    toast.error(`${error.request.statusText}`);
+    return error.request.statusText;
+  }
+}

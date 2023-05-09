@@ -8,13 +8,11 @@ export default function TweetsPage() {
   const [users, setUsers] = useState([]);
   const [countPage, setCountPage] = useState(1);
   const [error, setError] = useState(null);
-  // const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     getUsers(countPage)
       .then((data) => setUsers((prevUsers) => [...prevUsers, ...data]))
       .catch(setError);
-    // getUsers(countPage).then(setUsers).catch();
   }, [countPage]);
 
   function handleLoadMorePage() {
@@ -23,7 +21,7 @@ export default function TweetsPage() {
 
   return (
     <>
-      {users.length !== 0 && (
+      {users.length !== 0 && !error && (
         <>
           <div
             style={{

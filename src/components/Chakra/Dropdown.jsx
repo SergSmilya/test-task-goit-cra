@@ -1,7 +1,12 @@
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import { getUsersSort } from "../../utils/Api";
 
 export default function Dropdown() {
+  function sortByName() {
+    getUsersSort();
+  }
+
   return (
     <Menu>
       {({ isOpen }) => (
@@ -26,9 +31,9 @@ export default function Dropdown() {
             {isOpen ? "Close" : "Sort"}
           </MenuButton>
           <MenuList>
-            <MenuItem>Show all</MenuItem>
-            <MenuItem onClick={() => alert("Kagebunshin")}>Follow</MenuItem>
-            <MenuItem>Following</MenuItem>
+            <MenuItem onClick={sortByName}>Show all</MenuItem>
+            <MenuItem onClick={sortByName}>Follow</MenuItem>
+            <MenuItem onClick={sortByName}>Following</MenuItem>
           </MenuList>
         </>
       )}

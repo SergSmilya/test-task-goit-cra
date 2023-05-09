@@ -3,6 +3,7 @@ import css from "./Tweet.module.css";
 import Logo from "../../img/Logo.svg";
 import Picture_abstract from "../../img/Picture_abstract.png";
 import { putUserCount } from "../../utils/Api";
+import { toast } from "react-toastify";
 
 export default function Tweet({ user }) {
   const { id, avatar, tweets, followers, user_name } = user;
@@ -22,7 +23,7 @@ export default function Tweet({ user }) {
 
   const [countFollowers, setCountFollowers] = useState(followers);
   const [isActiveButton, setIsActiveButton] = useState(
-    JSON.parse(localStorage.getItem(id)) ?? false
+    JSON.parse(localStorage.getItem(id)).isActiveButton ?? false
   );
 
   const valueFollowersToString = String(countFollowers);
@@ -34,8 +35,8 @@ export default function Tweet({ user }) {
     `${valueFollowersToSlice}`;
 
   useEffect(() => {
-    localStorage.setItem(id, JSON.stringify(isActiveButton));
-  }, [id, isActiveButton]);
+    localStorage.setItem(id, JSON.stringify({ isActiveButton, user_name }));
+  }, [id, isActiveButton, user_name]);
 
   function setCountFollowersAndActiveButton(data) {
     setCountFollowers(data.followers);
@@ -46,13 +47,17 @@ export default function Tweet({ user }) {
     const currentId = e.currentTarget.id;
 
     if (isActiveButton) {
-      putUserCount(currentId, countFollowers - 1).then((data) => {
-        setCountFollowersAndActiveButton(data);
-      });
+      putUserCount(currentId, countFollowers - 1)
+        .then((data) => {
+          setCountFollowersAndActiveButton(data);
+        })
+        .catch(toast.warning);
     } else {
-      putUserCount(currentId, countFollowers + 1).then((data) => {
-        setCountFollowersAndActiveButton(data);
-      });
+      putUserCount(currentId, countFollowers + 1)
+        .then((data) => {
+          setCountFollowersAndActiveButton(data);
+        })
+        .catch(toast.warning);
     }
   }
 
@@ -102,12 +107,13 @@ export default function Tweet({ user }) {
   );
 }
 
-// ===========================================
+// ====================================
 // import { useEffect, useState } from "react";
 // import css from "./Tweet.module.css";
 // import Logo from "../../img/Logo.svg";
 // import Picture_abstract from "../../img/Picture_abstract.png";
 // import { putUserCount } from "../../utils/Api";
+// import { toast } from "react-toastify";
 
 // export default function Tweet({ user }) {
 //   const { id, avatar, tweets, followers, user_name } = user;
@@ -139,25 +145,32 @@ export default function Tweet({ user }) {
 //     `${valueFollowersToSlice}`;
 
 //   useEffect(() => {
-//     localStorage.setItem(id, JSON.stringify(isActiveButton));
-//   }, [id, isActiveButton]);
+//     localStorage.setItem(id, JSON.stringify(isActiveButton, user_name));
+//   }, [id, isActiveButton, user_name]);
+
+//   function setCountFollowersAndActiveButton(data) {
+//     setCountFollowers(data.followers);
+//     setIsActiveButton(!isActiveButton);
+//   }
 
 //   function handleClick(e) {
 //     const currentId = e.currentTarget.id;
 
 //     if (isActiveButton) {
-//       putUserCount(currentId, followers - 1).then((data) => {
-//         setCountFollowers(data.followers);
-//         setIsActiveButton(!isActiveButton);
-//       });
+//       putUserCount(currentId, countFollowers - 1)
+//         .then((data) => {
+//           setCountFollowersAndActiveButton(data);
+//         })
+//         .catch(toast.warning);
 //     } else {
-//       putUserCount(currentId, followers + 1).then((data) => {
-//         setCountFollowers(data.followers);
-//         setIsActiveButton(!isActiveButton);
-//       });
+//       putUserCount(currentId, countFollowers + 1)
+//         .then((data) => {
+//           setCountFollowersAndActiveButton(data);
+//         })
+//         .catch(toast.warning);
 //     }
 //   }
-
+//   console.log(JSON.parse(localStorage.getItem(id)));
 //   return (
 //     <li>
 //       <div className={tweet__card}>
