@@ -23,7 +23,7 @@ export default function Tweet({ user }) {
 
   const [countFollowers, setCountFollowers] = useState(followers);
   const [isActiveButton, setIsActiveButton] = useState(
-    JSON.parse(localStorage.getItem(id)).isActiveButton ?? false
+    JSON.parse(localStorage.getItem(id)) ?? false
   );
 
   const valueFollowersToString = String(countFollowers);
@@ -35,7 +35,7 @@ export default function Tweet({ user }) {
     `${valueFollowersToSlice}`;
 
   useEffect(() => {
-    localStorage.setItem(id, JSON.stringify({ isActiveButton, user_name }));
+    localStorage.setItem(id, JSON.stringify(isActiveButton));
   }, [id, isActiveButton, user_name]);
 
   function setCountFollowersAndActiveButton(data) {
