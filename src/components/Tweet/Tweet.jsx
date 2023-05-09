@@ -37,18 +37,21 @@ export default function Tweet({ user }) {
     localStorage.setItem(id, JSON.stringify(isActiveButton));
   }, [id, isActiveButton]);
 
+  function setCountFollowersAndActiveButton(data) {
+    setCountFollowers(data.followers);
+    setIsActiveButton(!isActiveButton);
+  }
+
   function handleClick(e) {
     const currentId = e.currentTarget.id;
 
     if (isActiveButton) {
       putUserCount(currentId, countFollowers - 1).then((data) => {
-        setCountFollowers(data.followers);
-        setIsActiveButton(!isActiveButton);
+        setCountFollowersAndActiveButton(data);
       });
     } else {
       putUserCount(currentId, countFollowers + 1).then((data) => {
-        setCountFollowers(data.followers);
-        setIsActiveButton(!isActiveButton);
+        setCountFollowersAndActiveButton(data);
       });
     }
   }
