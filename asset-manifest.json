@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/test-task-goit-cra/static/css/main.c927a295.css",
+    "main.js": "/test-task-goit-cra/static/js/main.25d7e241.js",
+    "static/media/Logo.svg": "/test-task-goit-cra/static/media/Logo.0c489972eb383e508d8736a410f9a333.svg",
+    "index.html": "/test-task-goit-cra/index.html",
+    "main.c927a295.css.map": "/test-task-goit-cra/static/css/main.c927a295.css.map",
+    "main.25d7e241.js.map": "/test-task-goit-cra/static/js/main.25d7e241.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c927a295.css",
+    "static/js/main.25d7e241.js"
+  ]
+}
