@@ -8,10 +8,10 @@ import { ChakraProvider, theme } from "@chakra-ui/react";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter basename="/test-task-goit-cra">
-    {/* <React.StrictMode> */}
+    <React.StrictMode>
     <ChakraProvider theme={theme}>
       <App />
     </ChakraProvider>
-    {/* </React.StrictMode> */}
+    </React.StrictMode>
   </BrowserRouter>
 );
